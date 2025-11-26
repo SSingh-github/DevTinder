@@ -1,0 +1,23 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/SSingh-github/DevTinder#readme",
+  "bugs": {
+    "url": "https://github.com/SSingh-github/DevTinder/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SSingh-github/DevTinder.git"
+  },
+  "license": "ISC",
+  "author": "Sukhpreet Singh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
