@@ -32,3 +32,9 @@ connectDB()
 .catch (err => {
     console.log(err)
 })
+
+/*
+1. data sanitization and schema validations
+2. encrypting passwords
+3. authentication, jwt and cookies
+*/
