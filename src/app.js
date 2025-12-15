@@ -34,7 +34,46 @@ connectDB()
 })
 
 /*
-1. data sanitization and schema validations
-2. encrypting passwords
-3. authentication, jwt and cookies
+TODO:- 
+
+
+Make your signup api dynamic to receive data from the end user
+user.findone with duplicate email ids, which object returned?
+Api - get user by email
+Api - feed api - GET / feed - get all the users from the database
+Api - get user by id
+Create a delete user api
+Difference between patch and put
+Api - update a user
+Explore the mongoose documentation for model methods
+What are options in a model.findoneandudpate method, explore more about it
+Api - update the user with email id
+
+
+Explore schematype options from the documentation
+Add required, unique, lowercase, min, min length, trim
+Add default
+Create a custom validate function for gender
+Improve the db schema - put all appropriate validations on each field in schema
+Add timestamps to the user schema
+Add api level validation on patch request and signup post api
+DATA sanitizing - add api validation for each field
+Install validator
+Explore validator library function and user validator functions for password, email NEVER TRUST req.body   validate data in signup api
+Install bcrypt package
+Create password hash using bcrypt.hash and save the user with encrypted password
+Create login api
+Compare passwords and throw errors if email or password is invalid
+
+Install cookie-parser
+Just send a dummy cookie to user and test in postman
+Create GET / profile api and check if you get the cookie back
+Install jsonwebtoken
+In login api, after email and password validation, create a JWT token and send it to user in cookies
+Read the cookies inside your profile api and find the logged in user
+userAuth middleware
+Add the userAuth middleware in profile api and a new sendconnectionrequest api
+Set the expiry of JWT token and cookies for 7 days
+Create user schema method to getJWT()
+Create user schema method to comparepassword(password)
 */
