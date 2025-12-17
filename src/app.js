@@ -22,6 +22,24 @@ app.post("/signup", async (req, res) => {
 
 });
 
+app.get("/user", async (req, res) => {
+
+    const {email} = req.body;
+
+    try {
+        const user = await User.findOne({email: email});
+        if(!user) {
+            throw new Error("User not found with this email address")
+        }
+        res.send(user);
+        console.log(user);
+    } catch (err) {
+        res.status(400).send("Error: " + err);
+        console.log("error while saving the user")
+    }
+
+});
+
 connectDB()
 .then ( db => {
     console.log("connected to the database successful")
