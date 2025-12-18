@@ -77,7 +77,8 @@ Add timestamps to the user schema
 Add api level validation on patch request and signup post api
 DATA sanitizing - add api validation for each field
 Install validator
-Explore validator library function and user validator functions for password, emailNEVER TRUST req.bodyvalidate data in signup api
+Explore validator library function and user validator functions for password, email
+NEVER TRUST req.bodyvalidate data in signup api
 Install bcrypt package
 Create password hash using bcrypt.hash and save the user with encrypted password
 Create login api
