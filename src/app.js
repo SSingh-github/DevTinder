@@ -40,6 +40,19 @@ app.get("/user", async (req, res) => {
 
 });
 
+app.get("/feed", async (req, res) => {
+
+    try {
+        const users = await User.find({});
+        console.log(users);
+        res.send(users);
+    } catch (err) {
+        res.status(400).send("Error: " + err);
+        console.log("error while saving the user")
+    }
+
+});
+
 connectDB()
 .then ( db => {
     console.log("connected to the database successful")
@@ -53,12 +66,6 @@ connectDB()
 
 /*
 TODO:- 
-
-
-Make your signup api dynamic to receive data from the end user
-user.findone with duplicate email ids, which object returned?
-Api - get user by email
-Api - feed api - GET / feed - get all the users from the database
 Api - get user by id
 Create a delete user api
 Difference between patch and put
