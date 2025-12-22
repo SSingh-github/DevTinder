@@ -53,6 +53,24 @@ app.get("/feed", async (req, res) => {
 
 });
 
+app.get("/user/:userId", async (req, res) => {
+
+    const {userId} = req.params;
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error("user with given id not found");
+        }
+        console.log(user);
+        res.send(user);
+    } catch (err) {
+        res.status(400).send("Error: " + err);
+        console.log("error while saving the user" + err)
+    }
+
+});
+
 connectDB()
 .then ( db => {
     console.log("connected to the database successful")
