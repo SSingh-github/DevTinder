@@ -71,6 +71,23 @@ app.get("/user/:userId", async (req, res) => {
 
 });
 
+app.delete("/user/:userId", async (req, res) => {
+
+    const {userId} = req.params;
+
+    try {
+        const user = await User.findByIdAndDelete(userId);
+        if (!user) {
+            throw new Error("user with given id not found");
+        }
+        res.send("user deleted successfully");
+    } catch (err) {
+        res.status(400).send("Error: " + err);
+        console.log("error while saving the user" + err)
+    }
+
+});
+
 connectDB()
 .then ( db => {
     console.log("connected to the database successful")
@@ -84,8 +101,6 @@ connectDB()
 
 /*
 TODO:- 
-Api - get user by id
-Create a delete user api
 Difference between patch and put
 Api - update a user
 Explore the mongoose documentation for model methods
