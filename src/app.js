@@ -101,6 +101,7 @@ connectDB()
 
 /*
 TODO:- 
+
 Difference between patch and put
 Api - update a user
 Explore the mongoose documentation for model methods
