@@ -88,11 +88,12 @@ app.delete("/user/:userId", async (req, res) => {
 
 });
 
-app.patch("/user/:userId", async (req, res) => {
+app.patch("/user", async (req, res) => {
     const data = req.body;
-    const {userId} = req.params;
+    const {emailId} = data;
     try {
-        const user = await User.findByIdAndUpdate(userId, data);
+        const {_id} = await User.findOne({email: emailId});
+        const user = await User.findByIdAndUpdate(_id, data);
         res.send("user updated successfully");
     } catch (err) {
         res.status(400).send("Error: " + err);
