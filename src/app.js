@@ -93,7 +93,7 @@ app.patch("/user", async (req, res) => {
     const {emailId} = data;
     try {
         const {_id} = await User.findOne({email: emailId});
-        const user = await User.findByIdAndUpdate(_id, data);
+        const user = await User.findByIdAndUpdate(_id, data, {runValidators: true});
         res.send("user updated successfully");
     } catch (err) {
         res.status(400).send("Error: " + err);
