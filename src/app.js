@@ -88,12 +88,19 @@ app.delete("/user/:userId", async (req, res) => {
 
 });
 
-app.patch("/user", async (req, res) => {
+app.patch("/user/:userId", async (req, res) => {
     const data = req.body;
-    const {emailId} = data;
+    const {userId} = req.params;
     try {
-        const {_id} = await User.findOne({email: emailId});
-        const user = await User.findByIdAndUpdate(_id, data, {runValidators: true});
+        const ALLOWED_KEYS = ["photoUrl", "about", "age", "skills"];
+        const isUpdateAllowed = Object.keys(data).every((k) => ALLOWED_KEYS.includes(k));
+        if(!isUpdateAllowed) {
+            throw new Error("Invalid data, update not allowed");
+        }
+        if(data.skills?.length > 10) {
+            throw new Error("10 skills are allowed at max");
+        }
+        const user = await User.findByIdAndUpdate(userId, data, {runValidators: true});
         res.send("user updated successfully");
     } catch (err) {
         res.status(400).send("Error: " + err);
