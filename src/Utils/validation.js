@@ -12,6 +12,16 @@ const validateUserPatchData = (req) => {
     }
 };
 
+const validateUserSignupData = (req) => {
+    const data = req.body;
+    const ALLOWED_KEYS = ["firstName", "lastName", "email", "password"];
+    const isSignupAllowed = Object.keys(data).every((k) => ALLOWED_KEYS.includes(k));
+    if(!isSignupAllowed) {
+        throw new Error("Invalid data, signup not allowed");
+    }
+};
+
 module.exports = {
     validateUserPatchData,
+    validateUserSignupData,
 }

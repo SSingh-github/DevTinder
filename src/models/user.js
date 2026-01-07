@@ -44,7 +44,7 @@ const userSchema = new Schema({
     },
     photoUrl: {
         type: String,
-        default: "",
+        default: "https://google.com",
         validate(value) {
             if(!validator.isURL(value)) {
                 throw new Error("not a valid photo url");
