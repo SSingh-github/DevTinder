@@ -1,7 +1,8 @@
 const express = require("express");
 const {adminAuth} = require("./middlewares/auth");
 const {connectDB} = require("./config/database");
-const {User} = require("./models/user")
+const {User} = require("./models/user");
+const {validateUserPatchData} = require("./Utils/validation");
 
 const app = express();
 
@@ -92,14 +93,7 @@ app.patch("/user/:userId", async (req, res) => {
     const data = req.body;
     const {userId} = req.params;
     try {
-        const ALLOWED_KEYS = ["photoUrl", "about", "age", "skills"];
-        const isUpdateAllowed = Object.keys(data).every((k) => ALLOWED_KEYS.includes(k));
-        if(!isUpdateAllowed) {
-            throw new Error("Invalid data, update not allowed");
-        }
-        if(data.skills?.length > 10) {
-            throw new Error("10 skills are allowed at max");
-        }
+        validateUserPatchData(req);
         const user = await User.findByIdAndUpdate(userId, data, {runValidators: true});
         res.send("user updated successfully");
     } catch (err) {

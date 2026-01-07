@@ -1,0 +1,17 @@
+
+
+const validateUserPatchData = (req) => {
+    const data = req.body;
+    const ALLOWED_KEYS = ["photoUrl", "about", "age", "skills"];
+    const isUpdateAllowed = Object.keys(data).every((k) => ALLOWED_KEYS.includes(k));
+    if(!isUpdateAllowed) {
+        throw new Error("Invalid data, update not allowed");
+    }
+    if(data.skills?.length > 10) {
+        throw new Error("10 skills are allowed at max");
+    }
+};
+
+module.exports = {
+    validateUserPatchData,
+}
