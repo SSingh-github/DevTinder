@@ -3,6 +3,7 @@ const {adminAuth} = require("./middlewares/auth");
 const {connectDB} = require("./config/database");
 const {User} = require("./models/user");
 const {validateUserPatchData, validateUserSignupData} = require("./Utils/validation");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -11,7 +12,18 @@ app.use(express.json());
 app.post("/signup", async (req, res) => {
     try {
         validateUserSignupData(req);
-        const user = new User(req.body);
+
+        const {firstName, lastName, email, password} = req.body;
+        const passwordHash = await bcrypt.hash(password, 10);
+
+        console.log(passwordHash);
+
+        const user = new User({
+            firstName,
+            lastName,
+            email, 
+            password: passwordHash
+        });
         await user.save();
         res.send("user saved successfully");
         console.log("user saved successfully");
