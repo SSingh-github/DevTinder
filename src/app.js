@@ -5,6 +5,7 @@ const {User} = require("./models/user");
 const {validateUserPatchData, validateUserSignupData} = require("./Utils/validation");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
@@ -49,8 +50,9 @@ app.post("/login", async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if(isPasswordValid) {
+            const token = await jwt.sign({_id: user._id}, "DEVTINDER");
             // send the token inside the cookie here
-            res.cookie("token", "fjsdkfjsklfjakfjsakfjslfslkfjkslafjsalj");
+            res.cookie("token", token);
             res.send("Login successfull");
         } else {
             throw new Error("Invalid credentials");
