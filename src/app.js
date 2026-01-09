@@ -68,8 +68,18 @@ app.get("/profile", async (req, res) => {
 
     try {
         const {token} = req.cookies;
+        if(!token) {
+            throw new Error("invalid token");
+        }
         console.log(token);
-       res.send("got profile");
+        const {_id} = await jwt.verify(token, "DEVTINDER");
+        
+        const user = await User.findById(_id);
+        if(!user) {
+            throw new Error("invalid token");
+        }
+
+       res.send(user);
     } catch (err) {
         res.status(400).send("Error: " + err);
         console.log("error while saving the user")
