@@ -67,20 +67,8 @@ app.post("/login", async (req, res) => {
 app.get("/profile", userAuth, async (req, res) => {
 
     try {
-    //     const {token} = req.cookies;
-    //     if(!token) {
-    //         throw new Error("invalid token");
-    //     }
-    //     console.log(token);
-    //     const {_id} = await jwt.verify(token, "DEVTINDER");
-        
-    //     const user = await User.findById(_id);
-    //     if(!user) {
-    //         throw new Error("invalid token");
-    //     }
-
-    //    res.send(user);
-    res.send("user found success");
+        const user = req.user;
+        res.send(user);
     } catch (err) {
         res.status(400).send("Error: " + err);
         console.log("error while saving the user")
