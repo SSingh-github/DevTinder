@@ -1,16 +1,28 @@
-const adminAuth = (req, res, next) => {
-    let tokenIsValid = false;
-    console.log("inside the middleware")
-    if (tokenIsValid) {
-        next();
-        console.log("authorized admin")
-    } else {
-        console.log("not authorized admin")
-        res.status(401).send("unauthorized");
-    }
-}
+const jwt = require("jsonwebtoken");
+const {User} = require("../models/user");
 
+const userAuth = async (req, res, next) => {
+    try {
+        const {token} = req.cookies;
+        if(!token) {
+            throw new Error("token not found");
+        }
+
+        const decodedToken = await jwt.verify(token, "DEVTINDER");
+        const {_id} = decodedToken;
+
+        const user = await User.findById(_id);
+
+        if(!user) {
+            throw new Error("user not found");
+        }
+
+        next();
+    } catch (error) {
+        res.status(400).send("Error: " + error.message)
+    }
+};
 
 module.exports = {
-    adminAuth
+    userAuth
 }
