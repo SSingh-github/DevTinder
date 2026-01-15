@@ -45,8 +45,7 @@ authRouter.post("/login", async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if(isPasswordValid) {
-            const token = await jwt.sign({_id: user._id}, "DEVTINDER", { expiresIn : 60});
-            // send the token inside the cookie here
+            const token = await jwt.sign({_id: user._id}, "DEVTINDER");
             res.cookie("token", token);
             res.send("Login successfull");
         } else {

@@ -21,7 +21,21 @@ const validateUserSignupData = (req) => {
     }
 };
 
+const validatePasswordPatchData = (req) => {
+    const data = req.body;
+    const ALLOWED_KEYS = ["oldPassword", "newPassword"];
+    const isUpdateAllowed = Object.keys(data).every((k) => ALLOWED_KEYS.includes(k));
+    if(!isUpdateAllowed) {
+        throw new Error("Invalid data, update not allowed");
+    }
+    const {oldPassword, newPassword} = data;
+    if(!oldPassword || !newPassword) {
+        throw new Error("invalid data");
+    }
+};
+
 module.exports = {
     validateUserPatchData,
     validateUserSignupData,
+    validatePasswordPatchData,
 }
