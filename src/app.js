@@ -1,5 +1,5 @@
 const express = require("express");
-const {connectDB} = require("./config/database");
+const { connectDB } = require("./config/database");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -16,13 +16,12 @@ app.use("/", profileRouter);
 app.use("/", requestRouter);
 
 connectDB()
-.then ( db => {
-    console.log("connected to the database successful")
+  .then((db) => {
+    console.log("connected to the database successful");
     app.listen(7777, () => {
-    console.log("the express server started successfully");
-});
-})
-.catch (err => {
-    console.log(err)
-})
-
+      console.log("the express server started successfully");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
