@@ -1,6 +1,7 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const app = express();
 
@@ -20,10 +21,12 @@ app.use("/", userRouter);
 connectDB()
   .then((db) => {
     console.log("connected to the database successful");
-    app.listen(7777, () => {
+    app.listen(process.env.PORT, () => {
       console.log("the express server started successfully");
     });
   })
   .catch((err) => {
     console.log(err);
   });
+
+//https://github.com/akshaymarch7/devTinder -> repo for code reference
