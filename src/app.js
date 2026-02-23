@@ -1,6 +1,7 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const cookieParser = require("cookie-parser");
+require("./Utils/cronJob");
 require("dotenv").config();
 
 const app = express();
