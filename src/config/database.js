@@ -1,5 +1,4 @@
-const URI =
-  "mongodb+srv://sukhpreetsinghcse2023gna:cA5UzOtHABJH4GFR@cluster0.sisdk.mongodb.net/";
+const URI = process.env.DB_CONNECTION_SECRET;
 const mongoose = require("mongoose");
 
 async function connectDB() {
