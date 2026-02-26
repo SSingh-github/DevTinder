@@ -1,6 +1,8 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const cookieParser = require("cookie-parser");
+const http = require("http");
+const initializeSocket = require("./Utils/socket");
 require("./Utils/cronJob");
 require("dotenv").config();
 
@@ -19,10 +21,13 @@ app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
 
+const server = http.createServer(app);
+initializeSocket(server);
+
 connectDB()
   .then((db) => {
     console.log("connected to the database successful");
-    app.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
       console.log("the express server started successfully");
     });
   })
